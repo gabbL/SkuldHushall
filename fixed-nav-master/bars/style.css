@@ -1,0 +1,12 @@
+#chartdiv {
+	width		: 50%;
+	height		: 500px;
+	font-size	: 11px;
+	position:	absolute;
+}
+
+#chartdiv2 {
+	width		: 50%;
+	height		: 500px;
+	font-size	: 11px;
+}

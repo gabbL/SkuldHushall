@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>PlottTest</title>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script>
+		function loadDoc(x) {
+			var xhttp = new XMLHttpRequest();
+			//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+			xhttp.onreadystatechange = function()
+			{	if (this.readyState == 2) {
+					console.log("THIRD");
+				}
+				if (this.readyState == 4 && this.status == 200)
+				{
+					var data = JSON.parse(this.responseText);
+					Plotly.newPlot('graf', data );
+					console.log("SECOND");
+				}
+			};
+			console.log("FIRST");
+			xhttp.open("GET", "plotDataPHP_REST.php", true);
+			// xhttp.open("POST", "plotDataPHP_REST.php", true);
+			xhttp.send();
+		}
+	</script>
+
+</head>
+
+
+
+<body>
+	<div id="graf" style="width: 1200px; height: 400px;"><!-- Plotly ritas här --></div>
+
+	<h1></h1>
+	<p>Data hämta från php, som i sin tur hämtar från en annan server via REST.</p>
+	<form action="" method="post">
+	<table>
+	<tr>
+	<td></td>
+	</tr>
+	<tr><td><select name="dropdown">
+		<option value="" disabled="disabled" selected="selected">Välj ett år!</option>
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014">2014</option>
+		<option value="2015">2015</option>
+		<option value="2016">2016</option>
+	</select></td>
+	<td><input type="submit" name="hyr" value="Visa år"></td>
+	</tr>
+	</table>
+	</form>
+	<!--onlick gör att när jag klickar på knappen så laddar funktionen loadDoc,
+	vilken anropar php-filen som läser data från SCB och skriver därefter ut det i en graf -->
+	<button type="button" onclick="loadDoc()">Ladda om</button>
+
+</body>
+
+</html>
